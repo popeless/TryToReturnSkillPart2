@@ -16,11 +16,26 @@ void write_numbers();
 
 inline void keep_window_open() { char ch; std::cin >> ch; }
 
+void error(std::string s) {
+    throw std::runtime_error(s);
+}
+
+//Test throw
+class out_of_bad {};
+
 int main()
 {
-    write_numbers();
-    keep_window_open();
-    return 0;
+    try {
+        write_numbers();
+        keep_window_open();
+    }
+        //Test throw
+        catch (std::runtime_error& e) {
+            std::cerr << "runtime error: " << e.what() << "\n";
+            keep_window_open();
+            return 1;
+        }
+        return 0;
 }
 
 void say_my_name()
@@ -57,7 +72,7 @@ int choose_cycle()
 void write_numbers()
 {
     int recursion_num = choose_cycle();
-    std::vector<std::string>names = {"Bob", "Alex", "Gennady", "Angela", "Nemedy"};
+    std::vector<std::string>names = { "Bob", "Alex", "Gennady", "Angela", "Nemedy" };
     switch (recursion_num) {
     case 1: {
         int i = 0;
@@ -69,7 +84,7 @@ void write_numbers()
         break;
     }
     case 2: {
-        for (int i = 0; i  < names.size(); ++i) {
+        for (int i = 0; i < names.size(); ++i) {
             std::cout << names[i] << " ETO FOR increment\n";
         }
         break;
@@ -78,11 +93,13 @@ void write_numbers()
         for (std::string i : names) {
             std::cout << i << " ETO FOR every\n";
         }
+        //Test throw
+        error("LOvi chukcha");
         break;
     }
     default: {
         std::cout << "NE NASHEL";
-        std::error("BAREBUHI NAPALI");
+
     }
     }
 }
