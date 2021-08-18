@@ -1,0 +1,3 @@
+a counts 13 times
+b counts 5 times
+c counts 2 times
